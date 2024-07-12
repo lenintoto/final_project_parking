@@ -1,42 +1,45 @@
 import Usuarios from "../models/usuarios.js"
-/*
-login 
-register 
-perfil
-recuperarContraseña
-nuevaContraseña
-actualizarContraseña
-actualizarUsuario
-eliminarUsuario
-
 
 const loginUsuario = (req, res)=>{
-    console.log("El usuario se va a loguear")
+    res.status(200).json({msg: "Login de usuario"})
 }
 
 const registrarUsuario = (req, res)=>{
-    console.log("El usuario se va a registrar")
+    res.status(200).json({msg: "Registrar usuario"})
 }
+
+const confirmarEmail = (req, res)=>{
+    res.status(200).json({msg: "Confirmar Email"})
+}
+
 const perfilUsuario = (req, res)=>{
-    console.log("Perfil del usuario")
+    res.status(200).json({msg: "Perfil de usuario"})
 }
+
 const recuperarContraseña = (req, res)=>{
-    console.log("Recuperar Contraseña")
+    res.status(200).json({msg: "Recuperar contraseña"})
 }
+
 const nuevaContraseña = (req, res)=>{
-    console.log("Nueva contraseña")
+    res.status(200).json({msg: "Nueva contraseña"})
 }
 
 const actualizarContraseña   = (req,res)=>{
-    console.log("Actualizar contraseña")
+    res.status(200).json({msg: "Actualizar contraseña"})
 }
 
-const actualizarUsuario = (req, res)=>{
-    console.log("Actualizar Usuario")
+const actualizarPerfil = (req, res)=>{
+    res.status(200).json({msg: "Actualizar usuario"})
 }
 
-const eliminarUsuario = (req, res)=>{
-    console.log("Eliminar Usuario")
-}
 
-*/
+export{
+    loginUsuario,
+    registrarUsuario,
+    perfilUsuario,
+    recuperarContraseña,
+    nuevaContraseña,
+    actualizarContraseña,
+    actualizarPerfil,
+    confirmarEmail
+}

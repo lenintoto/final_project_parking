@@ -48,13 +48,13 @@ const actualizarParqueadero = async(req,res)=>{
 
 const cambiarEstadoParqueadero = async(req,res)=>{
     const {id} = req.params
-    const {actualizar_estado} = req.body
+    const {estado} = req.body
     if(!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({
         msg: "El id que acaba de ingresar no existe"})
     if(Object.values(req.body).includes("")) return res.status(400).json({
         msg: "Lo sentimos, el campo no debe de estar vacio"
     })
-    const parqueadero = await Parqueaderos.findByIdAndUpdate(id, {estado: actualizar_estado})
+    const parqueadero = await Parqueaderos.findByIdAndUpdate(id, {status: estado})
     await parqueadero.save()
     res.status(200).json({msg: "El estado del parqueadero ha sido actualizado con exito"})
 }

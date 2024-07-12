@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-
+import bcrypt from "bcryptjs"
 
 const usuariosSchema = new mongoose.Schema({
     nombre: {type: String, require: true, trim: true},
@@ -15,5 +15,22 @@ const usuariosSchema = new mongoose.Schema({
 },{
     timestamps: true
 })
+
+
+usuariosSchema.methods.encrypPassword = async(password)=>{
+    const salt = await bcrypt.genSalt(10)
+    const passwordEncryp = await bcrypt.hash(password, salt)
+    return passwordEncryp
+} 
+
+usuariosSchema.methods.matchPassword = async(password) =>{
+    const response  = await bcrypt.compare(password, this.password)
+    return response
+}
+
+//Metodo para crear un token
+usuariosSchema.methods.createToken = async()=>{
+
+}
 
 export default mongoose.model("Usuarios", usuariosSchema)

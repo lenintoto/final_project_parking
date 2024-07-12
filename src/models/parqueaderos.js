@@ -7,7 +7,7 @@ const parqueaderoSchema = new mongoose.Schema({
     disponibilidad: {type: Boolean, require: true},
     dimensiones: {type: String, require: true},
     reservado: {type: Boolean, require: false, default: false},
-    estado: {type: Boolean, require: true, default: true}
+    status: {type: Boolean, require: true, default: true}
 },{
     timestamps:true
 })

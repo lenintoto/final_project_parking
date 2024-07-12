@@ -1,7 +1,8 @@
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
-import router from "./routers/parqueadero_routes.js"
+import routerParqueaderos from "./routers/parqueadero_routes.js"
+import routerUsuarios from "./routers/usuario_routes.js"
 
 //Inicializaciones
 const app = express()
@@ -17,7 +18,8 @@ app.use(express.json())
 
 
 //Rutas
-app.use("/api", router)
+app.use("/api", routerParqueaderos)
+app.use("/api", routerUsuarios)
 
 //Endpoint no es encontrado
 app.use((req,res)=>res.status(404).send("Endpoint no encontrado - 404")) 
