@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { actualizarParqueadero,
     detalleParqueadero,
-    eliminarParqueadero,
+    cambiarEstadoParqueadero,
     listarDisponibilidadParqueaderos,
     listarParqueaderos,
     registrarParqueadero } from "../controllers/parquedero_controller.js"
@@ -13,7 +13,7 @@ router.get("/parqueaderos/disponibilidad", listarDisponibilidadParqueaderos)
 router.get("/parqueaderos", listarParqueaderos)
 router.get("/parqueaderos/:id", detalleParqueadero)
 router.put("/parqueaderos/:id", actualizarParqueadero)
-router.delete("/parqueaderos/:id", eliminarParqueadero)
+router.patch("/parqueaderos/:id", cambiarEstadoParqueadero)
 
 
 export default router
