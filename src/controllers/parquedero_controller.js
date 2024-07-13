@@ -5,11 +5,10 @@ const registrarParqueadero = async(req,res)=>{
     const {numero, bloque} = req.body
     if(Object.values(req.body).includes("")) return res.status(400).json({
         msg: "Lo sentimos, debe llenar todos los campos"})
-    const numEstacionamiento = await Parqueaderos.findOne({numero})
-    const bloqueEstacionamiento = await Parqueaderos.findOne({bloque})
-    if(numEstacionamiento && bloqueEstacionamiento){
-         res.status(400).json({msg: "Lo sentimos, este parqueadero ya esta registrado"})
-    }
+    const numBloqueEstacionamiento = await Parqueaderos.findOne({numero, bloque})
+    if(numBloqueEstacionamiento) return res.status(400).json({
+        msg: "Lo sentimos, este parqueadero ya esta registrado"})
+        
     const nuevoParqueadero = new Parqueaderos(req.body)
     await nuevoParqueadero.save()
     res.status(200).json({msg: "Parqueadero registrado con exito"})

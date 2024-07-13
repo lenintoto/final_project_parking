@@ -17,20 +17,21 @@ const usuariosSchema = new mongoose.Schema({
 })
 
 
-usuariosSchema.methods.encrypPassword = async(password)=>{
+usuariosSchema.methods.encrypPassword = async function(password){
     const salt = await bcrypt.genSalt(10)
     const passwordEncryp = await bcrypt.hash(password, salt)
     return passwordEncryp
 } 
 
-usuariosSchema.methods.matchPassword = async(password) =>{
+usuariosSchema.methods.matchPassword = async function(password){
     const response  = await bcrypt.compare(password, this.password)
     return response
 }
 
 //Metodo para crear un token
-usuariosSchema.methods.createToken = async()=>{
-
+usuariosSchema.methods.createToken = async function(){
+    const tokenGenerado = Math.random().toString(36).slice(2)
+    return tokenGenerado
 }
 
 export default mongoose.model("Usuarios", usuariosSchema)

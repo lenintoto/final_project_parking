@@ -9,7 +9,7 @@ const parqueaderoSchema = new mongoose.Schema({
     reservado: {type: Boolean, require: false, default: false},
     status: {type: Boolean, require: true, default: true}
 },{
-    timestamps:true
+    timestamps: true
 })
 
 
