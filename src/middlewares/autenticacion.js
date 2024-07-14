@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken"
 import Usuarios from "../models/usuarios.js"
-import dotenv from "dotenv"
-dotenv.config()
 
 const autenticar = async(req, res, next)=>{
 

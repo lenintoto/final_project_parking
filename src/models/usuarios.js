@@ -27,7 +27,7 @@ const usuariosSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    status: {
+    estado: {
         type: Boolean,
         default: true
     },

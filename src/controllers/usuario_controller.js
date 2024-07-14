@@ -125,6 +125,9 @@ const comprobarTokenContraseña = async(req, res) =>{
 }
 
 const actualizarContraseña   = async(req,res)=>{
+    if(Object.values(req.body).includes("")) return res.status(404).json({
+        msg: "Lo sentimos debe llenar todos los campos"
+    })
     const usuario = await Usuarios.findById(req.usuario._id)
     if(!usuario) return res.status(404).json({
         msg: `Lo sentimos, no existe el usuario ${id}`
@@ -133,7 +136,7 @@ const actualizarContraseña   = async(req,res)=>{
     if(!verificarContraseña) return res.status(404).json({
         msg: "Lo sentimos, la contraseña actual no es correcta"
     })
-    usuario.password = await Usuarios.encrypPassword(req.body.nuevoPassword)
+    usuario.password = await usuario.encrypPassword(req.body.nuevoPassword)
     await usuario.save()
     res.status(200).json({msg: "Contraseña actualizada con exito"})
 

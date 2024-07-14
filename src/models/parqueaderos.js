@@ -26,7 +26,7 @@ const parqueaderoSchema = new mongoose.Schema({
         require: false,
         default: false
     },
-    status: {
+    estado: {
         type: Boolean,
         require: true,
         default: true
@@ -36,4 +36,4 @@ const parqueaderoSchema = new mongoose.Schema({
 })
 
 
-export default mongoose.model("Parqueadero", parqueaderoSchema)
+export default mongoose.model("Parqueaderos", parqueaderoSchema)
