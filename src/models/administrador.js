@@ -2,15 +2,50 @@ import mongoose from "mongoose"
 import bcrypt from "bcryptjs"
 
 const adminSchema = new mongoose.Schema({
-    nombre: {type: String, require: true, trim: true},
-    apellido: {type: String, require: true, trim: true},
-    identificacion: {type:Number, require:true, trim: true},
-    email: {type: String, require: true, trim: true, unique: true},
-    token: {type: String, default: null},
-    password: {type: String, require: true, trim: true},
-    telefono: {type: Number, require: false},
-    permisos:[{Usuarios:{type: mongoose.Schema.Types.ObjectId,ref:'Usuarios'},
-        Parqueadero:{type:mongoose.Schema.Types.ObjectId,ref:'Parqueadero'}}]
+    nombre: {
+        type: String, 
+        require: true, 
+        trim: true
+    },
+    apellido: {
+        type: String,
+        require: true,
+        trim: true
+    },
+    cedula: {
+        type:Number,
+        require:true, 
+        trim: true
+    },
+    email: {
+        type: String,
+        require: true, 
+        trim: true, 
+        unique: true
+    },
+    password: {
+        type: String, 
+        require: true,
+        trim: true
+    },
+    token: {
+        type: String, 
+        default: null
+    },
+    telefono: {
+        type: Number,
+        require: false
+    },
+    permisos:[
+        {Usuarios:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Usuarios'
+        },
+        Parqueadero:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Parqueadero'
+        }}
+    ]
 },{
     timestamps: true
 })

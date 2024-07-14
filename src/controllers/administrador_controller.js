@@ -6,7 +6,7 @@ import mongoose from "mongoose"
 
 //login
 const loginAdmin = async (req,res)=>{
-
+    
 }
 //registro 
 const registroAdmin = async (req,res)=>{

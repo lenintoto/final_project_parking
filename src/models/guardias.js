@@ -22,6 +22,10 @@ const guardiasSchema = new mongoose.Schema({
         require: true,
         trim: true
     },
+    password: {
+        type: String,
+        require: true
+    },
     telefono: {
         type: Number,
         default: null
@@ -33,7 +37,16 @@ const guardiasSchema = new mongoose.Schema({
     estado: {
         type: Boolean, 
         default: true
+    },
+    confirmEmail: {
+        type: Boolean,
+        default: false
+    },
+    id_parqueadero: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Parqueadero"
     }
+
 },{
     timestamps: true
 })
