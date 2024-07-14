@@ -19,8 +19,6 @@ router.get("/usuarios/confirmar-email/:token", confirmarEmail)
 router.post("/usuarios/recuperar-password", recuperarContraseña)
 router.get("/usuarios/recuperar-password/:token" ,comprobarTokenContraseña)
 router.post("/usuarios/nueva-password", nuevaContraseña)
-
-
 router.get("/usuarios/perfil", verificarRol,perfilUsuario)
 router.put("/usuarios/actualizar-password", verificarRol,actualizarContraseña)
 router.put("/usuarios/:id",verificarRol, actualizarPerfil)

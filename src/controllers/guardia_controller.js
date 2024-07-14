@@ -9,6 +9,11 @@ const perfil = (req, res) =>{
 
 }
 
+
+const registro =(req,res)=>{
+    res.status(200).json({msg: "registro guardia"})
+}
+
 const verParqueaderosDisponibles = (req, res) =>{
     res.status(200).json({msg: "parqueadero disponible guardia"})
 
@@ -28,6 +33,7 @@ const actualizarPerfil = (req, res) =>{
 
 export{login, 
     perfil, 
+    registro,
     verParqueaderosDisponibles, 
     enviarParqueaderosAUsuarios, 
     actualizarPerfil}

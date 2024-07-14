@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import Usuarios from "../models/usuarios.js"
+import administrador from "../models/administrador.js"
 
 const autenticar = async(req, res, next)=>{
 
@@ -14,6 +15,10 @@ const autenticar = async(req, res, next)=>{
         const {id, rol} = jwt.verify(authorization.split(" ")[1], process.env.JWT_SECRET)
         if(rol === "usuario"){
             req.usuario = await Usuarios.findById(id).lean().select("-password")
+            next()
+        }
+        else{
+            req.admin = await administrador.findById(id).lean().select("-password")
             next()
         }
 
