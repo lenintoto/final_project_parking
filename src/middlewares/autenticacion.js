@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken"
 import Usuarios from "../models/usuarios.js"
+import Administrador from "../models/administrador.js"
+import Guardias from "../models/guardias.js"
 
 const autenticar = async(req, res, next)=>{
 
@@ -15,7 +17,14 @@ const autenticar = async(req, res, next)=>{
         if(rol === "usuario"){
             req.usuario = await Usuarios.findById(id).lean().select("-password")
             next()
+        }else if(rol === "guardia"){
+            req.guardia = await Guardias.findById(id).lean().select("-password")
+            next()    
+        }else{
+            req.admin = await Administrador.findById(id).lean().select("-password")
+            next()
         }
+        
 
     } catch (error) {
         const e = new Error("Formato del token no válido")

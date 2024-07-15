@@ -18,7 +18,7 @@ router.post("/usuarios/registrar", registrarUsuario)
 router.get("/usuarios/confirmar-email/:token", confirmarEmail)
 router.post("/usuarios/recuperar-password", recuperarContraseña)
 router.get("/usuarios/recuperar-password/:token" ,comprobarTokenContraseña)
-router.post("/usuarios/nueva-password", nuevaContraseña)
+router.post("/usuarios/nueva-password/:token", nuevaContraseña)
 
 
 router.get("/usuarios/perfil", verificarRol,perfilUsuario)

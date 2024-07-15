@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-
+import bcrypt from "bcryptjs"
 
 const guardiasSchema = new mongoose.Schema({
     nombre: {
@@ -22,6 +22,10 @@ const guardiasSchema = new mongoose.Schema({
         require: true,
         trim: true
     },
+    password: {
+        type: String,
+        require: true
+    },
     telefono: {
         type: Number,
         default: null
@@ -33,10 +37,28 @@ const guardiasSchema = new mongoose.Schema({
     estado: {
         type: Boolean, 
         default: true
+    },
+    id_parqueadero: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Parqueadero"
     }
 },{
     timestamps: true
 })
+
+
+
+guardiasSchema.methods.encrypPassword = async function (password) {
+    const salt = await bcrypt.genSalt(10)
+    const passwordEncryp = await bcrypt.hash(password, salt)
+    return passwordEncryp
+}
+
+guardiasSchema.methods.matchPassword = async function (password) {
+    const response = await bcrypt.compare(password, this.password)
+    return response
+}
+
 
 
 export default mongoose.model("Guardias", guardiasSchema)

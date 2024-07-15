@@ -4,6 +4,7 @@ import cors from "cors"
 import routerParqueaderos from "./routers/parqueadero_routes.js"
 import routerUsuarios from "./routers/usuario_routes.js"
 import routerGuardias from "./routers/guardia_routes.js"
+import routerAdministrador from "./routers/administrador_routes.js"
 
 //Inicializaciones
 const app = express()
@@ -22,6 +23,8 @@ app.use(express.json())
 app.use("/api", routerParqueaderos)
 app.use("/api", routerUsuarios)
 app.use("/api", routerGuardias)
+app.use("/api", routerAdministrador)
+
 
 //Endpoint no es encontrado
 app.use((req,res)=>res.status(404).send("Endpoint no encontrado - 404")) 

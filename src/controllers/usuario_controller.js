@@ -8,7 +8,7 @@ const loginUsuario = async(req, res)=>{
     if(Object.values(req.body).includes("")) return res.status(400).json({
         msg: "Lo sentimos debe llenar todos los campos"
     })
-    const usuarioInformacion = await Usuarios.findOne({email}).select("-status -createdAt -updatedAt -__v -token")
+    const usuarioInformacion = await Usuarios.findOne({email}).select("-estado -createdAt -updatedAt -__v -token")
     if(!usuarioInformacion) return res.status(404).json({
         msg: "Lo siento el usuario no se encuentra registrado"
     })
@@ -87,7 +87,7 @@ const nuevaContraseña = async(req, res)=>{
     if(password !== confirmarPassword) return res.status(404).json({
         msg: "Lo sentimos, las contraseñas no coinciden"})
     const usuario = await Usuarios.findOne({token: req.params.token})
-    if( usuario.token !== req.params.token) return res.status(404).json({
+    if(usuario.token !== req.params.token) return res.status(404).json({
         msg:"Lo sentimos no hemos podido verificar su cuenta"})
     usuario.token = null
     usuario.password = await usuario.encrypPassword(password)

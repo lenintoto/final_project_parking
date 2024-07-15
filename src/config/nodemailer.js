@@ -18,7 +18,7 @@ const enviarCorreoUsuario = (correoUsuario, token) =>{
         from: process.env.USER_MAILTRAP,
         to: correoUsuario,
         subject: "Verifica tu cuenta",
-        html: `<p>Hola, haz click en este <a href=${process.env.URL_BACKEND}confirmar-email/${encodeURIComponent(token)}>enlace</a> para verificar tu cuenta </p>`
+        html: `<p>Hola, haz click en este <a href=${process.env.URL_BACKEND}usuarios/confirmar-email/${encodeURIComponent(token)}>enlace</a> para verificar tu cuenta </p>`
     }
 
     transporter.sendMail(opcionesCorreo, function(err, info){
@@ -38,7 +38,7 @@ const enviarRestablecimientoContraseña = async(correoUsuario, token)=>{
       subject: "Recupera tu Contraseña",
       html: `<h1>Sistema de gestión</h1>
       <hr>
-      <p>Haz click <a href=${process.env.URL_BACKEND}recuperar-password/${token}>aqui</a> para restablecer tu contraseña</p>`  
+      <p>Haz click <a href=${process.env.URL_BACKEND}usuarios/recuperar-password/${token}>aqui</a> para restablecer tu contraseña</p>`  
     })
     console.log("Mensaje enviado satisfactoriamente", opcionesCorreo.messageId)
 
@@ -46,5 +46,35 @@ const enviarRestablecimientoContraseña = async(correoUsuario, token)=>{
 
 
 
+const enviarParqueaderosUsuarios = async(correoUsuario, parqueaderosDisp)=>{
+    let opcionesCorreo = await transporter.sendMail({
+        from: process.env.USER_MAILTRAP,
+        to: correoUsuario,
+        subject: "Parqueaderos disponibles",
+        html: `<h1>Parquederos disponibles</h1>
+        <hr>
+        
+        <table>
+            <tr>
+                <td>Numero</td>
+                <td>Bloque</td>
+                <td>Dimensiones</td>
+            
+            </tr>
+            <tr>
+                <td>${parqueaderosDisp[0].numero}</td>
+                <td>${parqueaderosDisp[0].bloque}</td>
+                <td>${parqueaderosDisp[0].dimensiones}</td>
+            </tr>
 
-export {enviarCorreoUsuario, enviarRestablecimientoContraseña}
+        </table>
+        `
+        
+    })
+
+    console.log("Mensaje enviado satisfactoriamente", opcionesCorreo.messageId)
+}
+
+
+
+export {enviarCorreoUsuario, enviarRestablecimientoContraseña, enviarParqueaderosUsuarios}
