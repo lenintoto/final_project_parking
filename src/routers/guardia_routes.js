@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { actualizarPerfil, enviarParqueaderosAUsuarios, login, perfil, verParqueaderosDisponibles } from "../controllers/guardia_controller.js"
+import { actualizarPerfil,
+    enviarParqueaderosAUsuarios, 
+    login, 
+    perfil, 
+    verParqueaderosDisponibles 
+} from "../controllers/guardia_controller.js"
 
 const router = Router()
 

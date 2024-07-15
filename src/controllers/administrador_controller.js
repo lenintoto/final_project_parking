@@ -1,33 +1,60 @@
-import Administrador from "../models/administrador.js";
+import administrador from "../models/administrador.js";
 import guardias from "../models/guardias.js";
 import parqueaderos from "../models/parqueaderos.js";
 import usuarios from "../models/usuarios.js";
 import mongoose from "mongoose"
-
+import generarJWT from "../helpers/crearJWT.js"
 //login
 const loginAdmin = async (req,res)=>{
-    
+    const {email, password} = req.body
+    if(Object.values(req.body).includes("")) return res.status(400).json({
+        msg: "Lo sentimos debe llenar todos los campos"
+    })
+    const adminInformacion = await administrador.findOne({email}).select("-status -createdAt -updatedAt -__v -token")
+    if(!adminInformacion) return res.status(404).json({
+        msg: "Lo siento el usuario no se encuentra registrado"
+    })
+    const confirmarPasword = await adminInformacion.matchPassword(password)
+    if(!confirmarPasword) return res.status(404).json({
+        msg: "Lo sentimos la contraseña es incorrecta"
+    })
+    const token = generarJWT(adminInformacion._id, "administrador")
+    const {nombre, apellido, telefono, _id} = adminInformacion
+    res.status(200).json({
+        nombre, 
+        apellido, 
+        telefono, 
+        token, 
+        _id, 
+        email: adminInformacion.email})
 }
+
 //registro 
 const registroAdmin = async (req,res)=>{
+    const {email, password} = req.body
+    if(Object.values(req.body).includes("")) return res.status(400).json({
+        msg: "Lo sentimos debe llenar todos los campos"
+    })
+    const emailEncontrado = await administrador.findOne({email})
+    if(emailEncontrado) return res.status(400).json({
+        msg: "Lo sentimos este email, ya se encuentra registrado"
+    })
+    const nuevoUsuarioAdmin =  new administrador(req.body)
+    nuevoUsuarioAdmin.password = await nuevoUsuarioAdmin.encrypPassword(password)
+    await nuevoUsuarioAdmin.save()
+    res.status(200).json({msg: "Usurio creado"}) 
     
 }
-//confirmar email
-const confirmarEmailAdmin = async (req,res)=>{
-    
-}
+
 //Listar usuarios 
 const ListarUsuarios = async (req,res)=>{
-    //const usuario = await usuarios.find();
-    try {
-        const usuario = await usuarios.find();
-        res.status(200).json(usuario);
-    } catch (error) {
-        res.status(500).json({ msg: 'Error al obtener usuarios' });
-    }
+    const usuario = await usuarios.find()
+    res.status(200).json(usuario)
 
+    //const token = usuario.createToken()
 
 }
+
 //Eliminar usuarios
 const EliminarUsuarios = async(req,res)=>{
     const { id } = req.params;
@@ -40,8 +67,8 @@ const EliminarUsuarios = async(req,res)=>{
 
 //Listar guardias 
 const ListarGuardias = async (req,res)=>{
-    const guardia = await guardias.find();
-
+    const guardia = await guardias.find()
+    res.status(200).json(guardia)
 }
 
 //cambiar estado de usuario del guardia 
@@ -61,7 +88,6 @@ const listarDisponibilidadParqueaderosAdmin = async(req,res)=>{
 export{ 
     loginAdmin,
     registroAdmin,
-    confirmarEmailAdmin,
     EliminarUsuarios,
     cambiarEstadoGuardia,
     listarDisponibilidadParqueaderosAdmin,

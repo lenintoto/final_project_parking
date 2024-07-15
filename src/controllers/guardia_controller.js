@@ -9,7 +9,6 @@ const perfil = (req, res) =>{
 
 }
 
-
 const registro =(req,res)=>{
     res.status(200).json({msg: "registro guardia"})
 }

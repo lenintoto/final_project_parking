@@ -9,9 +9,8 @@ import { cambiarEstadoGuardia,
     registroAdmin} from "../controllers/administrador_controller.js";
 const router = Router()
 
-router.post("/administrador/login",verificarRol,loginAdmin)
-router.post("/administrador/registrar",verificarRol,registroAdmin)
-//router.post("/administrador/nueva-password",verificarRol,nuevaContraseñaAdmin)
+router.post("/administrador/login",loginAdmin)
+router.post("/administrador/registrar",registroAdmin)
 router.get("/administrador",verificarRol,ListarUsuarios)
 router.delete("/administrador/eliminar_usuario/:id",verificarRol,EliminarUsuarios)
 router.get("/administrador/listar_guardias",verificarRol,ListarGuardias)
