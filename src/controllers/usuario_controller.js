@@ -148,7 +148,7 @@ const actualizarPerfil = async(req, res)=>{
         msg: "El id que acaba de ingresar no existe"
     })
     if(Object.values(req.body).includes("")) return res.status(400).json({
-        msg: "Lo sentimos, debes llenar todos los campos"
+        msg: "Lo sentimos debes llenar todos los campos"
     })
     const usuario = await Usuarios.findByIdAndUpdate(id, req.body)
     await usuario.save()

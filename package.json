@@ -5,7 +5,11 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "admin_test":"mocha test/administrador_test.js",
+    "user_test":"mocha ./test/usuarios_test.js",
+    "parqueadero_test":"mocha test/parqueaderos_tests.js",
+    "guardia_test":"mocha ./test/guardias_tests.js"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +23,10 @@
     "moongose": "^1.0.0",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.6.0",
+    "sinon": "^18.0.0"
   }
 }
