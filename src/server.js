@@ -28,7 +28,7 @@ app.use("/api", routerGuardias);
 app.use("/api", routerAdministrador);
 
 //Documentacion
-app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(spect));
+app.use("/", swaggerUi.serve, swaggerUi.setup(spect));
 
 //Endpoint no es encontrado
 app.use((req, res) => res.status(404).send("Endpoint no encontrado - 404"));
